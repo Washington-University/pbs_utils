@@ -1,0 +1,11 @@
+#!/bin/bash
+
+printf "Enter job number: "
+read job_number
+
+printf "Enter new queue (e.g. HCPput, dque, etc.): "
+read new_queue
+
+echo "Moving job: ${job_number} to queue ${new_queue}"
+qalter ${job_number} -W queue=${new_queue}
+
