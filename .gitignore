@@ -10,6 +10,3 @@
 # Ignore compile Python modules
 *.pyc
 
-# Ignore text files that are inputs to operations
-*.txt
-

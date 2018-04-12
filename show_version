@@ -1,0 +1,9 @@
+#!/bin/bash
+
+version_file="version.txt"
+deployment_file="deployment.txt"
+
+cat ${version_file}
+if [ -e "${deployment_file}" ] ; then
+	cat ${deployment_file}
+fi

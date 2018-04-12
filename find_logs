@@ -1,0 +1,28 @@
+#!/bin/bash
+
+jobnumber=${1}
+
+node_file_name=nodelist.txt
+nodelist_from_file=( $( cat ${node_file_name} ) )
+nodelist="`echo "${nodelist_from_file[@]}"`"
+
+touch show_all_logs.tmp
+
+for node in ${nodelist} ; do
+	#echo ""
+	#echo "---------------------------------------------"
+	#echo ""
+	#echo "Searching on node: ${node}"
+
+	ssh ${node} 'find /var/spool/torque 2>/dev/null' > show_logs.tmp
+
+	lines_from_file=( $( cat show_logs.tmp ) )
+	lines="`echo "${lines_from_file[@]}"`"
+	for line in ${lines} ; do
+		echo "${node}: ${line}" >> show_all_logs.tmp
+	done
+done
+
+rm show_logs.tmp
+
+grep ${jobnumber} show_all_logs.tmp
